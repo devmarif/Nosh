@@ -1,8 +1,9 @@
-import {z} from "zod"
+import { z } from "zod";
 
 export const envSchema = z.object({
-    NODE_ENV :z.string(),
-    PORT: z.coerce.number()
-})
+  NODE_ENV: z.string(),
+  PORT: z.coerce.number(),
+  FRONTEND_URL: z.url(),
+});
 
-export type ENV = z.infer<typeof envSchema>
+export type ENV = z.infer<typeof envSchema>;

@@ -1,0 +1,18 @@
+
+services:
+  backend:
+    image: nosh:v1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "4000:4000"
+    networks:
+      - NOSH-Network
+    restart: unless-stopped
+
+networks:
+  NOSH-Network:
+    driver: bridge
