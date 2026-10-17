@@ -12,8 +12,9 @@ const serverShutDown = (signal: string) => {
   serverStart.close(async () => process.exit(0));
 };
 
-process.on("SIGTERM", () => serverShutDown("SIGTERM"));
 process.on("SIGINIT", () => serverShutDown("SIGINIT"));
+process.on("SIGTERM", () => serverShutDown("SIGTERM"));
+
 process.on("uncaughtException", (error) => {
   logger.error(error);
   process.exit(1);
