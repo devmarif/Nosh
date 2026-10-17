@@ -1,5 +1,6 @@
-
 # Stage 1: Build
+# Installs all dependencies and compiles the TypeScript source code.
+
 FROM node:24-bookworm-slim AS builder
 
 WORKDIR /app
@@ -10,7 +11,10 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
+
 # Stage 2: Production
+# Creates a smaller runtime image with production dependencies only.
+
 FROM node:24-bookworm-slim AS production
 
 ENV NODE_ENV=production

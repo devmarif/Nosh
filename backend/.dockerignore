@@ -1,20 +1,41 @@
+# Dependencies
 node_modules
+
+# Build output
 dist
+
+# Git
 .git
 .gitignore
+
+# Environment files and secrets
 .env
 .env.*
 .env.sample
+
+# IDE and editor files
 .vscode
 .idea
+
+# Logs
 *.logs
 yarn-debug.log*
 yarn-error.log*
+
+# Test coverage
 coverage
+
+# Temporary files
 tmp
 temp
+
+# OS-generated files
 .DS_Store
 Thumbs.db
+
+# Documentation
 README.md
+
+# Docker Compose files
 docker-compose.yml
 docker-compose.override.yml

@@ -1,3 +1,6 @@
+# Docker Compose Configuration
+# Defines the backend service, its build settings, environment variables,
+# port mapping, network, and restart policy.
 
 services:
   backend:
@@ -8,7 +11,7 @@ services:
     env_file:
       - .env
     ports:
-      - "4000:4000"
+      - "5000:5000"
     networks:
       - NOSH-Network
     restart: unless-stopped
