@@ -6,30 +6,30 @@
  * uncaught exceptions and unhandled promise rejections.
  */
 
-import app from "./app/app.js";
-import { env } from "./config/env.config.js";
+import { bootStrap } from "./app/bootStrap.js";
+import { createServer } from "./app/server.js";
+import { ShutDown } from "./app/shutDown.js";
 import { logger } from "./config/logger.js";
 
-const PORT = env.PORT;
-
-const serverStart = app.listen(PORT, () => {
-    logger.info(`Server is running on port ${PORT}`);
-});
-
-const serverShutDown = (signal: string) => {
-    logger.info(`${signal} received. Server shutting down...`);
-    serverStart.close(() => process.exit(0));
-};
-
-process.on("SIGINT", () => serverShutDown("SIGINT"));
-process.on("SIGTERM", () => serverShutDown("SIGTERM"));
-
-process.on("uncaughtException", (error) => {
+const start = async (): Promise<void> => {
+  try {
+    await bootStrap();
+    const server = createServer();
+    process.on("SIGINT", () => ShutDown(server, "SIGINT"));
+    process.on("SIGTERM", () => ShutDown(server, "SIGTERM"));
+  } catch (error) {
     logger.error(error);
     process.exit(1);
+  }
+};
+start();
+
+process.on("uncaughtException", (error) => {
+  logger.error(error);
+  process.exit(1);
 });
 
 process.on("unhandledRejection", (reason) => {
-    logger.error(reason);
-    process.exit(1);
+  logger.error(reason);
+  process.exit(1);
 });

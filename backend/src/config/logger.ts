@@ -15,4 +15,5 @@ export const logger = pino({
       target: "pino-pretty",
     },
   }),
+  base:undefined
 });
